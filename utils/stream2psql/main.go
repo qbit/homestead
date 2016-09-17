@@ -9,6 +9,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 )
 
 var head []string
@@ -19,7 +20,7 @@ func main() {
 	flag.Parse()
 
 	sql := `
-insert into sensorlogs (sensorid, metrics) values (%d, '%s');
+insert into sensorlogs (sensorid, created, metrics) values (%d, '%s', '%s');
 `
 
 	fi, err := os.Open(*file)
@@ -46,15 +47,30 @@ insert into sensorlogs (sensorid, metrics) values (%d, '%s');
 		if count == 0 {
 			head = record
 		}
-		count++
 
-		var metrics []string
-		for i, k := range head {
-			// '{{temp=>80}, {baro=>100}}'
-			metric := fmt.Sprintf("{%s=>%s}", k, record[i])
-			metrics = append(metrics, metric)
+		if count > 0 {
+			var metrics []string
+			var t time.Time
+			for i, k := range head {
+				// '{{temp=>80}, {baro=>100}}'
+				if k != "timestamp" {
+					metric := fmt.Sprintf(`"%s"=>"%s"`, k, record[i])
+					metrics = append(metrics, metric)
+				} else {
+					// Jan 2, 2006 at 3:04pm (MST)
+					// "2006-01-02T15:04:05Z07:00"
+					tf := "2006-01-02T15:04:05.999Z"
+					t, err = time.Parse(tf, record[i])
+					if err != nil {
+						fmt.Println(err)
+						fmt.Println(record[i], "->", tf)
+						os.Exit(1)
+					}
+				}
+			}
+			line := fmt.Sprintf(sql, *sid, t.Format(time.RFC3339Nano), strings.Join(metrics, ", "))
+			fmt.Println(line)
 		}
-		line := fmt.Sprintf(sql, *sid, "{"+strings.Join(metrics, ", ")+"}")
-		fmt.Println(line)
+		count++
 	}
 }
