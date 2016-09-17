@@ -52,7 +52,6 @@ insert into sensorlogs (sensorid, created, metrics) values (%d, '%s', '%s');
 			var metrics []string
 			var t time.Time
 			for i, k := range head {
-				// '{{temp=>80}, {baro=>100}}'
 				if k != "timestamp" {
 					metric := fmt.Sprintf(`"%s"=>"%s"`, k, record[i])
 					metrics = append(metrics, metric)
