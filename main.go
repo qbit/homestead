@@ -30,6 +30,7 @@ var templ *template.Template
 var store *sessions.CookieStore
 var listen string
 var tf = "2006-01-02T15:04:05.999Z"
+var rootDir string
 
 var funcMap = template.FuncMap{
 	"formatDate": func(t time.Time) string {
@@ -63,7 +64,9 @@ func init() {
 		log.Fatal(err)
 	}
 
-	templ, err = template.New("homestead").Funcs(funcMap).ParseGlob(dir + "/templates/*.html")
+	rootDir = dir
+
+	templ, err = template.New("homestead").Funcs(funcMap).ParseGlob(rootDir + "/templates/*.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -83,9 +86,10 @@ func main() {
 	defer db.Close()
 
 	router := mux.NewRouter()
+
 	router.PathPrefix("/public/").Handler(
 		http.StripPrefix("/public/",
-			http.FileServer(http.Dir("public"))))
+			http.FileServer(http.Dir(rootDir+"/public"))))
 
 	router.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
 
@@ -116,8 +120,6 @@ func main() {
 			}
 
 		}
-
-		fmt.Println(l.Metrics)
 
 		_, err := l.SetID(db)
 		if err != nil {
