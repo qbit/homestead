@@ -1,0 +1,42 @@
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>HomeStead</title>
+    <meta name="description" content="HomeStead Status">
+    <link rel="stylesheet" href="/public/stupid.css" type="text/css">
+    <link rel="stylesheet" href="/public/homestead.css" type="text/css">
+  </head>
+  <body>
+<div class="padded max900 frame">
+<div class="fill middle">
+</div>
+<div class="container">
+<div class="content half">
+  <div class="padded">
+  <form name="login" action="/login" method="POST">
+    <div class="container">
+      <label class="quarter right">User name:</label>
+      <div class="half">
+        <input type="text" class="fill" name="user">
+      </div>
+    </div>
+    <div class="container">
+      <label class="quarter right">Password:</label>
+      <div class="half">
+        <input type="password" class="fill" name="passwd">
+      </div>
+    </div>
+    <div class="half right lb">
+      {{ .csrfField }}
+      <input type="submit" class="btn red rounded" value="LOGIN"/>
+    </div>
+  </form>
+  </div>
+<footer>© 2016 <a href="https://homestead.akb.io">HomeStead</a></footer>
+</div>
+</div>
+</body>
+</html>
+
+

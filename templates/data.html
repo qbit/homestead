@@ -1,0 +1,37 @@
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>HomeStead</title>
+    <meta name="description" content="HomeStead Status">
+    <link rel="stylesheet" href="/public/stupid.css" type="text/css">
+    <link rel="stylesheet" href="/public/homestead.css" type="text/css">
+<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  </head>
+  <body>
+<div class="padded frame">
+<div class="fill middle">
+</div>
+<div class="container">
+<div class="content">
+<div class="article">
+{{ range .TopData }}
+<b>{{ .Name }}</b> avg: {{ .Avg }} min: {{ .Min }} max: {{.Max }}
+<div id="gauge_{{ .Name }}" class="speedgauge" style="min-width: 310px; max-width: 400px; height: 300px; margin: 0 auto"></div>
+{{ end }}
+
+{{ range .MonthData.Metrics }}
+{{ end }}
+<div id="linedata" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+<footer>© 2016 <a href="https://homestead.akb.io">HomeStead</a></footer>
+</div>
+</div>
+<script src="/public/charts.js"></script>
+</body>
+</html>
+
+
