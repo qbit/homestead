@@ -123,7 +123,7 @@ function makeSpeed(title, min, max, count) {
     };
 }
 
-function makeChart(name) {
+function makeChart(name, attr) {
     return function() {
 	$('#gauge_'+name).highcharts(
 	    makeSpeed(name, 0, 120, 6),
@@ -134,7 +134,7 @@ function makeChart(name) {
 			    url: 'data/current/' + name,
 			    success: function(data) {
 				var point = chart.series[0].points[0];
-				point.update(Math.floor(data.temp));
+				point.update(Math.floor(data[attr]));
 			    }
 			});
 		    }, 10000);
@@ -150,7 +150,7 @@ $(function () {
 	    var i, l = data.length ;
 	    for (i = 0; i < l; i++) {
 		console.log(data[i].name);
-		   makeChart(data[i].name)();
+		makeChart(data[i].name, "temp")();
 	    }
 	}
     });
