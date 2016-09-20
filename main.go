@@ -119,6 +119,7 @@ func main() {
 
 		_, err := log.SetID(db)
 		if err != nil {
+			fmt.Println(err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
