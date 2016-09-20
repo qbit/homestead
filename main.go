@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -56,7 +57,13 @@ func init() {
 	flag.Parse()
 
 	store = sessions.NewCookieStore([]byte(cookieSecret))
-	templ, err = template.New("homestead").Funcs(funcMap).ParseGlob("templates/*.html")
+
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	templ, err = template.New("homestead").Funcs(funcMap).ParseGlob(dir + "/templates/*.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -158,139 +165,139 @@ func main() {
 		fmt.Fprint(w, *val)
 	})
 	/*
-				router.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
-					session, err := store.Get(r, "session-name")
-					if err != nil {
-						http.Error(w, err.Error(), http.StatusInternalServerError)
-						return
-					}
-
-					session.Options = &sessions.Options{
-						MaxAge: -1,
-					}
-					session.Save(r, w)
-					http.Redirect(w, r, "/", http.StatusFound)
-
-				})
-
-	p
-
-				router.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
-					authHeader := r.Header.Get("Authorization")
-					if authHeader == "" {
-						http.Error(w, "Not Authorized!", http.StatusUnauthorized)
-						return
-					}
-
-					token, err := jwt.Parse(authHeader, func(token *jwt.Token) (interface{}, error) {
-						return []byte(jwtSecret), nil
-					})
-
-					if err != nil {
-						http.Error(w, err.Error(), http.StatusUnauthorized)
-						return
-					}
-
-					if token.Valid {
+					router.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
 						session, err := store.Get(r, "session-name")
 						if err != nil {
 							http.Error(w, err.Error(), http.StatusInternalServerError)
 							return
 						}
 
-						data := r.FormValue("data")
-
-			}
-				})
-
-				router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-					err := templ.ExecuteTemplate(w, "index.html", map[string]interface{}{
-						csrf.TemplateTag: csrf.TemplateField(r),
-					})
-					if err != nil {
-						http.Error(w, err.Error(), http.StatusInternalServerError)
-						return
-					}
-				})
-				router.HandleFunc("/admin", func(w http.ResponseWriter, r *http.Request) {
-					session, err := store.Get(r, "session-name")
-					if err != nil {
-						http.Error(w, err.Error(), http.StatusInternalServerError)
-						return
-					}
-
-					uVal := session.Values["user"]
-					var u, ok = uVal.(*homestead.User)
-					if !ok {
-						uVal = &homestead.User{}
-						session.Values["user"] = &uVal
-						session.Save(r, w)
-					}
-
-					if ok && u.Admin {
-						err = templ.ExecuteTemplate(w, "admin.html", nil)
-
-						if err != nil {
-							http.Error(w, err.Error(), http.StatusInternalServerError)
-							return
+						session.Options = &sessions.Options{
+							MaxAge: -1,
 						}
-
-					}
-				})
-				router.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
-					session, err := store.Get(r, "session-name")
-					if err != nil {
-						http.Error(w, err.Error(), http.StatusInternalServerError)
-						return
-					}
-
-					uVal := session.Values["user"]
-					var u, ok = uVal.(*homestead.User)
-					if !ok {
-						uVal = &homestead.User{}
-						session.Values["user"] = &uVal
 						session.Save(r, w)
-					}
-
-					if ok && u.Admin {
-						// grab data here and send it to template
-						err = templ.ExecuteTemplate(w, "data.html", nil)
-
-						if err != nil {
-							http.Error(w, err.Error(), http.StatusInternalServerError)
-							return
-						}
-
-					}
-				})
-
-				router.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
-					session, err := store.Get(r, "session-name")
-					if err != nil {
-						http.Error(w, err.Error(), http.StatusInternalServerError)
-						return
-					}
-
-					user := r.FormValue("user")
-					passwd := r.FormValue("passwd")
-
-					if user == "" && passwd == "" {
 						http.Redirect(w, r, "/", http.StatusFound)
-					} else {
-						u, err := homestead.Auth(db, user, passwd)
+
+					})
+
+		p
+
+					router.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
+						authHeader := r.Header.Get("Authorization")
+						if authHeader == "" {
+							http.Error(w, "Not Authorized!", http.StatusUnauthorized)
+							return
+						}
+
+						token, err := jwt.Parse(authHeader, func(token *jwt.Token) (interface{}, error) {
+							return []byte(jwtSecret), nil
+						})
+
+						if err != nil {
+							http.Error(w, err.Error(), http.StatusUnauthorized)
+							return
+						}
+
+						if token.Valid {
+							session, err := store.Get(r, "session-name")
+							if err != nil {
+								http.Error(w, err.Error(), http.StatusInternalServerError)
+								return
+							}
+
+							data := r.FormValue("data")
+
+				}
+					})
+
+					router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+						err := templ.ExecuteTemplate(w, "index.html", map[string]interface{}{
+							csrf.TemplateTag: csrf.TemplateField(r),
+						})
+						if err != nil {
+							http.Error(w, err.Error(), http.StatusInternalServerError)
+							return
+						}
+					})
+					router.HandleFunc("/admin", func(w http.ResponseWriter, r *http.Request) {
+						session, err := store.Get(r, "session-name")
 						if err != nil {
 							http.Error(w, err.Error(), http.StatusInternalServerError)
 							return
 						}
 
-						if u.Authed {
-							session.Values["user"] = u
+						uVal := session.Values["user"]
+						var u, ok = uVal.(*homestead.User)
+						if !ok {
+							uVal = &homestead.User{}
+							session.Values["user"] = &uVal
 							session.Save(r, w)
-							http.Redirect(w, r, "/data", http.StatusFound)
 						}
-					}
 
-				})
+						if ok && u.Admin {
+							err = templ.ExecuteTemplate(w, "admin.html", nil)
+
+							if err != nil {
+								http.Error(w, err.Error(), http.StatusInternalServerError)
+								return
+							}
+
+						}
+					})
+					router.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
+						session, err := store.Get(r, "session-name")
+						if err != nil {
+							http.Error(w, err.Error(), http.StatusInternalServerError)
+							return
+						}
+
+						uVal := session.Values["user"]
+						var u, ok = uVal.(*homestead.User)
+						if !ok {
+							uVal = &homestead.User{}
+							session.Values["user"] = &uVal
+							session.Save(r, w)
+						}
+
+						if ok && u.Admin {
+							// grab data here and send it to template
+							err = templ.ExecuteTemplate(w, "data.html", nil)
+
+							if err != nil {
+								http.Error(w, err.Error(), http.StatusInternalServerError)
+								return
+							}
+
+						}
+					})
+
+					router.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+						session, err := store.Get(r, "session-name")
+						if err != nil {
+							http.Error(w, err.Error(), http.StatusInternalServerError)
+							return
+						}
+
+						user := r.FormValue("user")
+						passwd := r.FormValue("passwd")
+
+						if user == "" && passwd == "" {
+							http.Redirect(w, r, "/", http.StatusFound)
+						} else {
+							u, err := homestead.Auth(db, user, passwd)
+							if err != nil {
+								http.Error(w, err.Error(), http.StatusInternalServerError)
+								return
+							}
+
+							if u.Authed {
+								session.Values["user"] = u
+								session.Save(r, w)
+								http.Redirect(w, r, "/data", http.StatusFound)
+							}
+						}
+
+					})
 	*/
 	loggedRouter := handlers.LoggingHandler(os.Stdout, router)
 	/*
