@@ -123,8 +123,6 @@ func main() {
 			return
 		}
 
-		// Call InsertLog
-
 		logID, err := homestead.InsertLog(db, &log)
 		if err != nil {
 			fmt.Println(err)

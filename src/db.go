@@ -2,6 +2,7 @@ package homestead
 
 import (
 	"database/sql"
+	"fmt"
 	"strings"
 	"time"
 
@@ -180,6 +181,7 @@ func Auth(db *sql.DB, u string, p string) (*User, error) {
 
 func InsertLog(db *sql.DB, log *Log) (*int, error) {
 	var id int
+	fmt.Printf("%v", log)
 	err := db.QueryRow(`
 insert into sensorlogs (sensorid, metrics) values ($1, $2) returning id
 `, log.SensorID, strings.Join(log.Metrics, ", ")).Scan(&id)
