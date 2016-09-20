@@ -92,7 +92,7 @@ func main() {
 			http.FileServer(http.Dir(rootDir+"/public"))))
 
 	router.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
-		data, err := homestead.GetTopStats(db, "GreenHouse")
+		data, err := homestead.GetMonthData(db)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
