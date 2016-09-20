@@ -92,10 +92,24 @@ func main() {
 			http.FileServer(http.Dir(rootDir+"/public"))))
 
 	router.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
-		data, err := homestead.GetTopStats(db, "GreenHouse")
+		tData, err := homestead.GetTopStats(db, "GreenHouse")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
+		}
+
+		mData, err := homestead.GetMonthData(db)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		data := struct {
+			TopData   homestead.TopStats
+			MonthData homestead.DataBlob
+		}{
+			*tData,
+			*mData,
 		}
 		err = templ.ExecuteTemplate(w, "data.html", data)
 
