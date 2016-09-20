@@ -98,33 +98,35 @@ func main() {
 	})
 
 	router.HandleFunc("/data/store", func(w http.ResponseWriter, r *http.Request) {
-		var log homestead.Log
+		var l homestead.Log
 		r.ParseMultipartForm(32 << 20) // 32 mb
 
 		for k, v := range r.Form {
 			switch k {
 			case "timestamp":
-				log.Stamp, err = time.Parse(tf, strings.Join(v, ""))
+				l.Stamp, err = time.Parse(tf, strings.Join(v, ""))
 				if err != nil {
 					http.Error(w, err.Error(), http.StatusInternalServerError)
 					return
 				}
 			case "sensor":
-				log.SensorName = strings.Join(v, "")
+				l.SensorName = strings.Join(v, "")
 			default:
-				log.Metrics = append(log.Metrics, fmt.Sprintf(`"%s"=>"%s"`, k, strings.Join(v, "")))
+				l.Metrics = append(l.Metrics, fmt.Sprintf(`"%s"=>"%s"`, k, strings.Join(v, "")))
 			}
 
 		}
 
-		_, err := log.SetID(db)
+		fmt.Println(l.Metrics)
+
+		_, err := l.SetID(db)
 		if err != nil {
 			fmt.Println(err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
-		logID, err := homestead.InsertLog(db, &log)
+		logID, err := homestead.InsertLog(db, &l)
 		if err != nil {
 			fmt.Println(err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
