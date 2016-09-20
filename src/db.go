@@ -73,7 +73,7 @@ from (
         from sensorlogs
           join sensors on (sensors.id = sensorid)
         where
-        sensors.name = $?
+        sensors.name = $1
         sensorlogs.created >= now() - '1 day'::INTERVAL
 ) as a
 join sensors on (sensorid = sensors.id)
