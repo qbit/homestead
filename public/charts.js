@@ -269,9 +269,9 @@ $(function () {
 
 function lineSeries(data) {
 
-    var o = [], l, count = 0;
-    for (l in data) {
-	l = JSON.parse(l);
+    var o = [], i, l, count = 0;
+    for (i = 0, l = data.length; i < l; i++) {
+	l = JSON.parse(data[i]);
 	if (count === 0) {
 	    var k;
 	    for (k in l) {
