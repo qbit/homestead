@@ -267,4 +267,23 @@ $(function () {
     });
 });
 
+function lineSeries(data) {
+    var o = [], l, count = 0;
+    for (l in data) {
 
+	if (count === 0) {
+	    var k;
+	    for (k in l) {
+		var d = {};
+		d.name = k;
+		o.push(d);
+	    }
+
+	}
+	count++;
+    }
+    return o;
+}
+
+
+console.log(lineSeries(lineData));

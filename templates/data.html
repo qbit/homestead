@@ -23,13 +23,18 @@
 <div id="gauge_{{ .Name }}" class="speedgauge" style="min-width: 310px; max-width: 400px; height: 300px; margin: 0 auto"></div>
 {{ end }}
 
-{{ range .MonthData.Metrics }}
-{{ end }}
 <div id="linedata" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 </div>
 <footer>© 2016 <a href="https://homestead.akb.io">HomeStead</a></footer>
 </div>
 </div>
+<script>
+var lineData = [
+{{ range .MonthData.Metrics }}
+{{ . }}
+{{ end }}
+];
+</scrpit>
 <script src="/public/charts.js"></script>
 </body>
 </html>
