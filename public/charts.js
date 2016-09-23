@@ -280,7 +280,7 @@ function lineSeries(data) {
 	    }
 	}
 	
-	for (k in len) {
+	for (k in d) {
 	    o[k].data.push(d[k]);
 	    console.log(d[k]);
 	}
