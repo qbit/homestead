@@ -268,10 +268,10 @@ $(function () {
 });
 
 function lineSeries(data) {
-    data = JSON.parse(data);
+
     var o = [], l, count = 0;
     for (l in data) {
-
+	l = JSON.parse(l);
 	if (count === 0) {
 	    var k;
 	    for (k in l) {
