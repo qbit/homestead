@@ -269,21 +269,20 @@ $(function () {
 
 function lineSeries(data) {
 
-    var o = {}, i, l = data.length, k, count = 0;
-    for (i = 0; i < l; i++) {
-	l = JSON.parse(data[i]);
+    var o = {}, d, i, len = data.length, k, count = 0;
+    for (i = 0; i < len; i++) {
+	d = JSON.parse(data[i]);
 	if (count === 0) {
-	    for (k in l) {
-		var d = {};
+	    for (k in d) {
 		o[k] = {};
 		o[k].data = [];
 		o[k].name = k;
 	    }
 	}
 	
-	for (k in l) {
-	    o[k].data.push(l[k]);
-	    console.log(l[k]);
+	for (k in len) {
+	    o[k].data.push(d[k]);
+	    console.log(d[k]);
 	}
 	
 	count++;
