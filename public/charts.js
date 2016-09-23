@@ -3,6 +3,9 @@ function i2h(i) {
     return (h.length < 2) ? "0" + h : h;
 }
 
+var OM = new Date();
+OM = OM.setMonth(OM.getMonth() - 1);
+
 function makePlotRange(min, max, count) {
     var num = Math.floor(max / count);
     var i, l;
@@ -248,7 +251,7 @@ $(function () {
 		    enabled: false
 		},
 		pointInterval: 300000,
-		pointStart: Date.setMonth(Date.getMonth() - 1)
+		pointStart: OM
 	    }
 	},
 	series: lineSeries(lineData),
