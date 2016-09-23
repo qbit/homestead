@@ -283,6 +283,7 @@ function lineSeries(data) {
 	
 	for (k in l) {
 	    o[k].data.push(l[k]);
+	    console.log(l[k]);
 	}
 	
 	count++;
