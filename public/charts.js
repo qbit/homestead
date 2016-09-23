@@ -247,8 +247,8 @@ $(function () {
 		marker: {
 		    enabled: false
 		},
-		pointInterval: 3600000, // one hour
-		pointStart: Date.UTC(2015, 4, 31, 0, 0, 0)
+		pointInterval: 300000,
+		pointStart: Date.setMonth(Date.getMonth() - 1)
 	    }
 	},
 	series: lineSeries(lineData),
@@ -264,29 +264,29 @@ function lineSeries(data) {
 
     var o = {}, d, i, len = data.length, k, count = 0;
     for (i = 0; i < len; i++) {
-	d = JSON.parse(data[i]);
-	if (count === 0) {
-	    for (k in d) {
-		o[k] = {};
-		o[k].data = [];
-		o[k].name = k;
+	    d = JSON.parse(data[i]);
+	    if (count === 0) {
+		for (k in d) {
+		    o[k] = {};
+		    o[k].data = [];
+		    o[k].name = k;
+		}
 	    }
-	}
 	
-	for (k in d) {
-	    o[k].data.push(d[k]);
-	}
+	    for (k in d) {
+		o[k].data.push(d[k]);
+	    }
 	
-	count++;
-    }
+	    count++;
+	}
 
-    var r = [];
-    for (k in o) {
-	r.push(o[k]);
-    }
+	var r = [];
+	for (k in o) {
+	    r.push(o[k]);
+	}
 
-    return r;
-}
+	return r;
+    }
 
 
 
