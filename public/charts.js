@@ -269,8 +269,8 @@ $(function () {
 
 function lineSeries(data) {
 
-    var o = {}, i, l, k, count = 0;
-    for (i = 0, l = data.length; i < l; i++) {
+    var o = {}, i, l = data.length, k, count = 0;
+    for (i = 0; i < l; i++) {
 	l = JSON.parse(data[i]);
 	if (count === 0) {
 	    for (k in l) {
@@ -281,15 +281,13 @@ function lineSeries(data) {
 	    }
 	}
 	
-	count++;
-    }
-    for (i = 0, l = data.length; i < l; i++) {
-	l = JSON.parse(data[i]);
 	for (k in l) {
 	    o[k].data.push(l[k]);
 	}
+	
+	count++;
     }
-    
+
     return o;
 }
 
