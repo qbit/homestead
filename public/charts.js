@@ -268,6 +268,7 @@ $(function () {
 });
 
 function lineSeries(data) {
+    data = JSON.parse(data);
     var o = [], l, count = 0;
     for (l in data) {
 
