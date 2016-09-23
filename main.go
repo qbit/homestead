@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"encoding/gob"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"html/template"
@@ -44,6 +45,10 @@ var funcMap = template.FuncMap{
 	},
 	"printHTML": func(b []byte) template.HTML {
 		return template.HTML(string(b))
+	},
+	"marshal": func(v interface{}) template.JS {
+		a, _ := json.Marshal(v)
+		return template.JS(a)
 	},
 }
 
