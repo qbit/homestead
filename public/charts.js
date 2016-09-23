@@ -282,13 +282,17 @@ function lineSeries(data) {
 	
 	for (k in d) {
 	    o[k].data.push(d[k]);
-	    console.log(d[k]);
 	}
 	
 	count++;
     }
 
-    return o;
+    var r = [];
+    for (k in o) {
+	r.push(o[k]);
+    }
+
+    return r;
 }
 
 
