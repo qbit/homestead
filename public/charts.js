@@ -38,7 +38,7 @@ function makePlotRange(min, max, count) {
 	a.push({from: min, to: min + num, color: '#' + i2h(r) + i2h(g) + '00'});
 	min += num;
     }
-    
+
     return a;
 }
 
@@ -115,14 +115,14 @@ function makeSpeed(title, min, max, count) {
 		},
 		plotBands: makePlotRange(min, max, count)
 	    },
-	
-	    series: [{
-		name: title,
-		data: [min],
-		tooltip: {
-		    valueSuffix: ' °F'
-		}
-	    }]
+
+	series: [{
+	    name: title,
+	    data: [min],
+	    tooltip: {
+		valueSuffix: ' °F'
+	    }
+	}]
     };
 }
 
@@ -263,33 +263,39 @@ $(function () {
     });
 });
 
-function lineSeries(data) {
+var lsMap = {
+    "temp": "Temperature",
+    "humidity": "Humidity"
+};
+
+function lineSeries(data, map) {
 
     var o = {}, d, i, len = data.length, k, count = 0;
     for (i = 0; i < len; i++) {
-	    d = JSON.parse(data[i]);
-	    if (count === 0) {
-		for (k in d) {
+	d = JSON.parse(data[i]);
+	if (count === 0) {
+	    for (k in d) {
+		if (lsMap[k]) {
 		    o[k] = {};
 		    o[k].data = [];
-		    o[k].name = k;
+		    o[k].name = lsMap[k];
 		}
 	    }
-	
-	    for (k in d) {
+	}
+
+	for (k in d) {
+	    if (lsMap[k]) {
 		o[k].data.push(d[k]);
 	    }
-	
-	    count++;
 	}
 
-	var r = [];
-	for (k in o) {
-	    r.push(o[k]);
-	}
-
-	return r;
+	count++;
     }
 
+    var r = [];
+    for (k in o) {
+	r.push(o[k]);
+    }
 
-
+    return r;
+}
