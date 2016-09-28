@@ -36,6 +36,15 @@ var lineData = [
 {{ .JSON | marshal }},
 {{ end }}
 ];
+
+var gaugeData = {
+{{ range .TopData }}
+{
+"{{ .Name }}_avg": {{ .Avg }},
+"{{ .Name }}_min": {{ .Min }},
+"{{ .Name }}_max": {{.Max }}
+},
+};
 </script>
 <script src="/public/charts.js"></script>
 </body>
