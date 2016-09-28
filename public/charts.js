@@ -388,16 +388,20 @@ $('#low-temp').highcharts(Highcharts.merge(gaugeOptions, {
         }
     },
 
+    credits: {
+	enabled: false
+    },
+
     series: [{
         name: 'Low Temp',
         data: [1],
         dataLabels: {
-            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+	    format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                 ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' +
                 '<span style="font-size:12px;color:silver">°F</span></div>'
         },
         tooltip: {
-            valueSuffix: '°F'
+	    valueSuffix: '°F'
         }
     }]
 
