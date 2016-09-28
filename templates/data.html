@@ -13,12 +13,7 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
   </head>
   <body>
-<div class="padded frame">
-<div class="fill middle">
-</div>
-<div class="container">
-<div class="content">
-  <div class="article">
+  <div>
   <div class="third" id="low-temp" style="width: 300px; height: 200px; float: left"></div>
 {{ range .TopData }}
 <b>{{ .Name }}</b> avg: {{ .Avg }} min: {{ .Min }} max: {{.Max }}
@@ -28,8 +23,6 @@
 <div class="container" id="linedata" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 </div>
 <footer>© 2016 <a href="https://homestead.akb.io">HomeStead</a></footer>
-</div>
-</div>
 <script>
 var lineData = [
 {{ range .MonthData.Metrics }}
