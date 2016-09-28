@@ -168,9 +168,6 @@ $(function () {
 	title: {
 	    text: 'Weather data for Greenhouse'
 	},
-	subtitle: {
-	    text: 'May 31 and and June 1, 2015 at two locations in Vik i Sogn, Norway'
-	},
 	xAxis: {
 	    type: 'datetime',
 	    labels: {
@@ -264,38 +261,38 @@ $(function () {
 });
 
 var lsMap = {
-    "temp": "Temperature",
-    "humidity": "Humidity"
+"temp": "Temperature",
+"humidity": "Humidity"
 };
 
 function lineSeries(data, map) {
 
-    var o = {}, d, i, len = data.length, k, count = 0;
-    for (i = 0; i < len; i++) {
-	d = JSON.parse(data[i]);
-	if (count === 0) {
-	    for (k in d) {
-		if (lsMap[k]) {
-		    o[k] = {};
-		    o[k].data = [];
-		    o[k].name = lsMap[k];
-		}
-	    }
-	}
+var o = {}, d, i, len = data.length, k, count = 0;
+for (i = 0; i < len; i++) {
+d = JSON.parse(data[i]);
+if (count === 0) {
+for (k in d) {
+if (lsMap[k]) {
+o[k] = {};
+o[k].data = [];
+o[k].name = lsMap[k];
+}
+}
+}
 
-	for (k in d) {
-	    if (lsMap[k]) {
-		o[k].data.push(d[k]);
-	    }
-	}
+for (k in d) {
+if (lsMap[k]) {
+o[k].data.push(d[k]);
+}
+}
 
-	count++;
-    }
+count++;
+}
 
-    var r = [];
-    for (k in o) {
-	r.push(o[k]);
-    }
+var r = [];
+for (k in o) {
+r.push(o[k]);
+}
 
-    return r;
+return r;
 }
