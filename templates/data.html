@@ -13,10 +13,10 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
   </head>
   <body>
-  <div class="container">
+  <div class="container center">
   <div class="third" id="low-temp" style="width: 300px; height: 200px;"></div>
 {{ range .TopData }}
-<div class="third" id="gauge_{{ .Name }}" class="speedgauge" style="width: 300px; height: 200px;"></div>
+<div class="third" id="gauge_{{ .Name }}" class="speedgauge" style="min-width: 310px; max-width: 400px; height: 300px; margin: 0 auto"></div>
 {{ end }}
   <div class="third" id="high-temp" style="width: 300px; height: 200px;"></div>
 <div class="container" id="linedata"></div>
