@@ -14,12 +14,12 @@
   </head>
   <body>
   <div class="container">
-  <div class="third" id="low-temp" style="width: 300px; height: 200px;"></div>
+  <div class="third" id="low-temp"></div>
 {{ range .TopData }}
 <b>{{ .Name }}</b> avg: {{ .Avg }} min: {{ .Min }} max: {{.Max }}
-<div class="third" id="gauge_{{ .Name }}" class="speedgauge" style="min-width: 310px; max-width: 400px; height: 300px; margin: 0 auto"></div>
+<div class="third" id="gauge_{{ .Name }}" class="speedgauge"></div>
 {{ end }}
-  <div class="third" id="high-temp" style="width: 300px; height: 200px;"></div>
+  <div class="third" id="high-temp"></div>
 <div class="container" id="linedata" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 </div>
 <footer>© 2016 <a href="https://homestead.akb.io">HomeStead</a></footer>
