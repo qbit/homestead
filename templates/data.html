@@ -37,13 +37,12 @@ var lineData = [
 {{ end }}
 ];
 
+// Todo , this will break with more sensors.
 var gaugeData = {
 {{ range .TopData }}
-{
 "{{ .Name }}_avg": {{ .Avg }},
 "{{ .Name }}_min": {{ .Min }},
 "{{ .Name }}_max": {{.Max }}
-},
 {{ end }}
 };
 </script>
