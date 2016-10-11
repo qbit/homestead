@@ -103,6 +103,10 @@ func main() {
 		http.StripPrefix("/public/",
 			http.FileServer(http.Dir(rootDir+"/public"))))
 
+	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprint(w, "Hi")
+	})
+
 	router.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
 		tData, err := homestead.GetTopStats(db, "GreenHouse")
 		if err != nil {
