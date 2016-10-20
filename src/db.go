@@ -87,7 +87,7 @@ from
       sensorlogs
           join sensors on (sensors.id = sensorid)
 where
-      created >= now() - '1 month'::interval and
+      sensorlogs.created >= now() - '1 month'::interval and
       sensors.name = $1     
 order by created desc
 `
