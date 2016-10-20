@@ -89,7 +89,7 @@ from
 where
       sensorlogs.created >= now() - '1 month'::interval and
       sensors.name = $1     
-order by created desc
+order by sensorlogs.created desc
 `
 
 func GetMonthData(db *sql.DB, sensor string) (*DataBlob, error) {
