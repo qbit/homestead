@@ -114,7 +114,7 @@ func main() {
 			return
 		}
 
-		mData, err := homestead.GetMonthData(db)
+		mData, err := homestead.GetMonthData(db, "GreenHouse")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

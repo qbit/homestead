@@ -85,14 +85,17 @@ select
       hstore_to_json_loose(metrics)
 from
       sensorlogs
+          join sensors on (sensors.id = sensorid)
 where
-      created >= now() - '1 month'::interval
+      created >= now() - '1 month'::interval and
+      sensors.name = $1 and
+      
 order by created desc
 `
 
-func GetMonthData(db *sql.DB) (*DataBlob, error) {
+func GetMonthData(db *sql.DB, sensor string) (*DataBlob, error) {
 	var d = &DataBlob{}
-	rows, err := db.Query(monthData)
+	rows, err := db.Query(monthData, sensor)
 	if err != nil {
 		return nil, err
 	}
