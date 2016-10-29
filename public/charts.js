@@ -155,8 +155,10 @@ $(function () {
 	success: function(data) {
 	    var i, l = data.length ;
 	    for (i = 0; i < l; i++) {
-		console.log(data[i].name);
-		makeChart(data[i].name, "temp")();
+		if (data[i].name === "GreenHouse") {
+		  console.log(data[i].name);
+		  makeChart(data[i].name, "temp")();
+		}
 	    }
 	}
     });
