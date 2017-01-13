@@ -155,7 +155,7 @@ $(function () {
 	success: function(data) {
 	    var i, l = data.length ;
 	    for (i = 0; i < l; i++) {
-		if (data[i].name === station) {
+		if (data[i].name === sensor) {
 		  console.log(data[i].name);
 		  makeChart(data[i].name, "temp")();
 		}
@@ -171,7 +171,7 @@ $(function () {
 	    type: 'spline'
 	},
 	title: {
-	    text: 'Weather data for ' . station
+	    text: 'Weather data for ' . sensor
 	},
 	xAxis: {
 	    type: 'datetime',
