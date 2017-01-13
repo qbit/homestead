@@ -23,6 +23,7 @@
 </div>
 <footer>© 2016 <a href="https://homestead.akb.io">HomeStead</a></footer>
 <script>
+var sensor = "{{ .Sensor }}"
 var lineData = [
 {{ range .MonthData.Metrics }}
 {{ .JSON | marshal }},
@@ -30,7 +31,6 @@ var lineData = [
 ];
 
 // Todo , this will break with more sensors.
-var sensor = "{{ .Sensor }}"
 var gaugeData = {
 {{ range .TopData }}
 "{{ .Name }}_avg": {{ .Avg }},
