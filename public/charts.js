@@ -1,3 +1,5 @@
+var station="GreenHouse";
+
 function i2h(i) {
     var h = parseInt(i).toString(16);
     return (h.length < 2) ? "0" + h : h;
@@ -151,11 +153,11 @@ function makeChart(name, attr) {
 
 $(function () {
     $.get({
-	url: 'data/sensors',
+	url: '/data/sensors',
 	success: function(data) {
 	    var i, l = data.length ;
 	    for (i = 0; i < l; i++) {
-		if (data[i].name === "GreenHouse") {
+		if (data[i].name === station) {
 		  console.log(data[i].name);
 		  makeChart(data[i].name, "temp")();
 		}
@@ -171,7 +173,7 @@ $(function () {
 	    type: 'spline'
 	},
 	title: {
-	    text: 'Weather data for Greenhouse'
+	    text: 'Weather data for ' . station
 	},
 	xAxis: {
 	    type: 'datetime',
