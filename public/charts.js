@@ -139,7 +139,7 @@ function makeChart(name, attr) {
 		if (!chart.renderer.forExport) {
 		    setInterval(function() {
 			$.get({
-			    url: 'data/current/' + name,
+			    url: '/data/current/' + name,
 			    success: function(data) {
 				var point = chart.series[0].points[0];
 				point.update(Math.floor(data[attr]));
