@@ -121,7 +121,7 @@ function makeSpeed(title, min, max, count) {
 
 	series: [{
 	    name: title,
-	    data: [gaugeData.GreenHouse_avg],
+	    data: [gaugeData[sensor + "_avg"]],
 	    tooltip: {
 		valueSuffix: ' °F'
 	    }
@@ -374,7 +374,7 @@ $('#high-temp').highcharts(Highcharts.merge(gaugeOptions, {
 
     series: [{
         name: 'High Temp',
-        data: [gaugeData.GreenHouse_max],
+	data: [gaugeData[sensor + "_max"]],
         dataLabels: {
             format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                 ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
@@ -403,7 +403,7 @@ $('#low-temp').highcharts(Highcharts.merge(gaugeOptions, {
 
     series: [{
         name: 'Low Temp',
-        data: [gaugeData.GreenHouse_min],
+	data: [gaugeData[sensor + "_min"]],
         dataLabels: {
 	    format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                 ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' +
