@@ -125,9 +125,11 @@ func main() {
 		data := struct {
 			TopData   homestead.TopStats
 			MonthData homestead.DataBlob
+			Sensor    string
 		}{
 			*tData,
 			*mData,
+			sensor,
 		}
 		err = templ.ExecuteTemplate(w, "data.html", data)
 

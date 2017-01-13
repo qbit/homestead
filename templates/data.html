@@ -30,6 +30,7 @@ var lineData = [
 ];
 
 // Todo , this will break with more sensors.
+var sensor = "{{ .Sensor }}"
 var gaugeData = {
 {{ range .TopData }}
 "{{ .Name }}_avg": {{ .Avg }},

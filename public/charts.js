@@ -1,5 +1,3 @@
-var station="GreenHouse";
-
 function i2h(i) {
     var h = parseInt(i).toString(16);
     return (h.length < 2) ? "0" + h : h;
