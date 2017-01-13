@@ -107,14 +107,16 @@ func main() {
 		fmt.Fprint(w, "Hi")
 	})
 
-	router.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
-		tData, err := homestead.GetTopStats(db, "GreenHouse")
+	router.HandleFunc("/data/get/{sensor}", func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		sensor := vars["sensor"]
+		tData, err := homestead.GetTopStats(db, sensor)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
-		mData, err := homestead.GetMonthData(db, "GreenHouse")
+		mData, err := homestead.GetMonthData(db, sensor)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
