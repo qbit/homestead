@@ -19,6 +19,15 @@ int upload = 300000;
 
 Weather sensor;
 
+void setup_leds()
+{
+	#define RGB_NOTIFICATIONS_CONNECTING_ONLY 1
+	RGB.control(true);
+	RGB.brightness(0);
+}
+
+STARTUP(setup_leds());
+
 //---------------------------------------------------------------
 void setup()
 {
