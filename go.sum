@@ -1,0 +1,17 @@
+github.com/dgrijalva/jwt-go v0.0.0-20160616191556-d2709f9f1f31/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
+github.com/gorilla/context v0.0.0-20160817184632-08b5f424b927 h1:XIP+oRz9JtkgvNAOZWhCV4Rvvuk+oCaockNRllzNjTQ=
+github.com/gorilla/context v0.0.0-20160817184632-08b5f424b927/go.mod h1:kBGZzfjB9CEq2AlWe17Uuf7NDRt0dE0s8S51q0aT7Yg=
+github.com/gorilla/csrf v0.0.0-20160602035145-50eb875b7d37/go.mod h1:hxGa+qNn35co03vt75oDkIVPid4opvgJdE8E7yK0qKs=
+github.com/gorilla/handlers v0.0.0-20160228171604-ee54c7b44cab h1:WswuRtLyNm6ABXEQ1LSd7gsW15zA8RQsQzZbMYDm6Ug=
+github.com/gorilla/handlers v0.0.0-20160228171604-ee54c7b44cab/go.mod h1:Qkdc/uu4tH4g6mTK6auzZ766c4CA0Ng8+o/OAirnOIQ=
+github.com/gorilla/mux v0.0.0-20160317213430-0eeaf8392f5b h1:4OcRAUBSclcjVrZ8n7/pl9iWUx7JXw4Mj6bww0ZlBhE=
+github.com/gorilla/mux v0.0.0-20160317213430-0eeaf8392f5b/go.mod h1:1lud6UwP+6orDFRuTfBEV8e9/aOM/c4fVVCaMa2zaAs=
+github.com/gorilla/securecookie v0.0.0-20160816222338-c13558c2b1c4 h1:zJPoPqzFv0YWH5lOlHaZ4g9YZKexaHu5CCNIIGMpJ/I=
+github.com/gorilla/securecookie v0.0.0-20160816222338-c13558c2b1c4/go.mod h1:ra0sb63/xPlUeL+yeDciTfxMRAA+MP+HVt/4epWDjd4=
+github.com/gorilla/sessions v0.0.0-20160901061854-7ab2742f1e37 h1:23lcMASy3IFrV0l93ky3iNbeqNgjKByL1+WNXbB/Wdw=
+github.com/gorilla/sessions v0.0.0-20160901061854-7ab2742f1e37/go.mod h1:+WVp8kdw6VhyKExm03PAMRn2ZxnPtm58pV0dBVPdhHE=
+github.com/lib/pq v0.0.0-20160831222520-50761b0867bd h1:1BKcGC7eo9wk4c/y2eqrMj3/Wcmj+ZkMn1JpiCpbEgU=
+github.com/lib/pq v0.0.0-20160831222520-50761b0867bd/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
+github.com/pkg/errors v0.0.0-20160822090010-17b591df3784/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
+github.com/qbit/pgenv v0.0.0-20160820133404-64ee9b68f79a h1:8XgNHcQHrygzQg/nD9pBy+BS58t4JDzY9pGlm5mh9N8=
+github.com/qbit/pgenv v0.0.0-20160820133404-64ee9b68f79a/go.mod h1:CItqjCxyBdxLBYOWCXpbvJLEhaApLY8F/zagtriyEqA=
