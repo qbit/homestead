@@ -6,6 +6,7 @@ const char server[] = "data";
 
 HomeStead homestead(server); // Create a Homestead object
 
+//char sensorName[] = "outside";
 char sensorName[] = "GreenHouse";
 float humidity = 0;
 float tempf = 0;
@@ -33,7 +34,7 @@ void setup()
 {
 	Serial.begin(9600);   // open serial over USB at 9600 baud
 
-	WiFi.selectAntenna(ANT_EXTERNAL);
+	//WiFi.selectAntenna(ANT_EXTERNAL);
 
 	// Make sure your Serial Terminal app is closed before powering your device
 	// Now open your Serial Terminal, and hit any key to continue!
@@ -64,6 +65,7 @@ void setup()
 
 	sensor.enableEventFlags(); //Necessary register calls to enble temp, baro and alt
 
+        postToHomestead();
 }
 //---------------------------------------------------------------
 void loop()
@@ -78,7 +80,7 @@ void loop()
         lastPrint = millis();
 
         // Use the printInfo() function to print data out to Serial
-        //printInfo();
+        printInfo();
         postToHomestead();
       }
 }
@@ -121,6 +123,7 @@ int postToHomestead()
 	int i = 0;
 	int retVal = 0;
 
+	Serial.println("connecting");
 	if (client.connect("10.0.1.5", port)) // Connect to the server
 	{
 		// Post message to indicate connect success

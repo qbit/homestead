@@ -1,4 +1,5 @@
 DEVICE?=GreenHouse
+#DEVICE?=outside
 DEVICE_TYPE?=photon
 
 show:
