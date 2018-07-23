@@ -76,8 +76,8 @@ select
         min(temp::float),
         max(temp::float),
         avg(temp::float),
-	coalesce(max(rain::float) rain, 0),
-	coalesce(max(windspeed::float) windspeed, 0),
+	coalesce(max(rain::float), 0) rain,
+	coalesce(max(windspeed::float), 0) windspeed,
         name
 from (
         select
