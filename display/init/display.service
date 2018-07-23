@@ -1,0 +1,15 @@
+[Unit]
+Description=Run weather display
+# After= usb?
+
+[Service]
+Type=simple
+# ExecStart=/home/pi/rtl_433/build/src/rtl_433 -G -C customary -U -D -F json:/home/pi/433.json
+# Disable debug
+ExecStart=/home/pi/7.5/raspberrypi/python/crap.py
+Restart=always
+RestartSec=10
+User=pi
+
+[Install]
+WantedBy=multi-user.target
