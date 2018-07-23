@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	"net/http/httputil"
@@ -21,6 +22,7 @@ func main() {
 
 	dir := &httputil.ReverseProxy{
 		Director: func(req *http.Request) {
+			fmt.Printf("%s://%s => %s://%s\n", req.URL.Scheme, req.URL.Host, u.Scheme, u.Host)
 			req.URL.Scheme = u.Scheme
 			req.URL.Host = u.Host
 		},
