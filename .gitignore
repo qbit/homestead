@@ -30,3 +30,5 @@ _testmain.go
 homestead
 utils/stream2psql/stream2psql
 utils/hsproxy/hsproxy
+
+*.bin
