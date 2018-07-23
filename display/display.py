@@ -89,12 +89,21 @@ def local_weather():
         print op
 
 def get_weather(loc=81069):
-    weather = {}
     wu = w_url % ("weather", w_key, loc)
-    try: 
-        weather = json.loads(urllib2.urlopen(wu).read())
+    js = """
+        {"name":"failed","main":{"temp":0},"wind":{"speed":0}, "weather":[{"main":"fail"}]}
+        """
+    weather = json.loads(js)
+
+    try:
+        js = urllib2.urlopen(wu).read()
     except:
-        print("Can't query api.openweathermap.org")
+        print("Can't query api.openweathermap.org", wu)
+
+    try: 
+        weather = json.loads(js)
+    except:
+        print("Can't read json from api.openweathermap.org")
     return weather
 
 def ktof(k):
@@ -155,6 +164,7 @@ def main():
 
         draw.rectangle([0,98, 640,100], fill = 0)
 
+        print(wx)
         draw.text((30, 105), "%s:" % wx['name'], font = hfont, fill = 0)
         draw.text((30, 125), '  Temp: %dF (%dC)' % (ktof(wx['main']['temp']), wx['main']['temp'] - 273.15), font = font, fill = 0)
         draw.text((30, 145), '  Wind: %d mph' % math.ceil(wx['wind']['speed']), font = font, fill = 0)

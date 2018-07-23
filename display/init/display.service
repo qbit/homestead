@@ -6,7 +6,7 @@ Description=Run weather display
 Type=simple
 # ExecStart=/home/pi/rtl_433/build/src/rtl_433 -G -C customary -U -D -F json:/home/pi/433.json
 # Disable debug
-ExecStart=/home/pi/7.5/raspberrypi/python/crap.py
+ExecStart=/home/pi/7.5/raspberrypi/python/display.py
 Restart=always
 RestartSec=10
 User=pi
