@@ -271,7 +271,9 @@ $(function () {
 var lsMap = {
     "temp": "Temperature",
     "humidity": "Humidity",
-    "pres_inhg": "Inch of mercury"
+    "pres_inhg": "Inch of mercury",
+    "wind_speed": "Wind Speed",
+    "rain": "Rain"
 };
 
 function lineSeries(data, map) {
